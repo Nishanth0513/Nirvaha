@@ -12,6 +12,8 @@ import SoundHealing from './pages/SoundHealing'
 import Profile from './pages/Profile'
 import Auth from './components/Auth'
 import ResetPassword from './pages/ResetPassword'
+import DiscussionRooms from './pages/DiscussionRooms'
+import Marketplace from './pages/Marketplace'
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -87,6 +89,22 @@ const App = () => {
                 element={
                   <ProtectedRoute>
                     <Profile />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/discussion-rooms" 
+                element={
+                  <ProtectedRoute>
+                    <DiscussionRooms />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/marketplace" 
+                element={
+                  <ProtectedRoute>
+                    <Marketplace />
                   </ProtectedRoute>
                 } 
               />
