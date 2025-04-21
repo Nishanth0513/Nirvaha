@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import Testimonials from './Testimonials'
 
 const Footer = () => {
   const [email, setEmail] = useState('')
@@ -34,6 +35,9 @@ const Footer = () => {
   return (
     <footer className="bg-dark-100 pt-16 pb-8 px-4">
       <div className="max-w-7xl mx-auto">
+        {/* Testimonials Section */}
+        <Testimonials />
+
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Section */}
           <div>

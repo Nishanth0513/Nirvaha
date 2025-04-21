@@ -10,11 +10,16 @@ const Navbar = () => {
   const location = useLocation()
   const { currentUser } = useAuth()
 
-  const navLinks = [
+  const mainNavLinks = [
     { name: 'Home', path: '/' },
     { name: 'Zen Chat', path: '/divine-chat' },
     { name: 'Meditation', path: '/meditation' },
     { name: 'Sound Healing', path: '/sound-healing' },
+  ]
+
+  const secondaryNavLinks = [
+    { name: 'Discussion Rooms', path: '/discussion-rooms' },
+    { name: 'Marketplace', path: '/marketplace' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ]
@@ -37,10 +42,10 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-24">
+        <div className="flex justify-between h-20">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-4">
-              <div className="w-24 h-24 flex items-center justify-center">
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="w-12 h-12 flex items-center justify-center">
                 <img 
                   src="/assets/nirvaha-logo.png" 
                   alt="Nirvaha" 
@@ -48,10 +53,10 @@ const Navbar = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <span className={`text-3xl font-bold tracking-wider ${scrolled ? 'text-white' : 'text-white'}`}>
+                <span className={`text-2xl font-bold tracking-wider ${scrolled ? 'text-white' : 'text-white'}`}>
                   NIRVAHA
                 </span>
-                <span className={`text-sm tracking-widest ${scrolled ? 'text-[#00D5B0]' : 'text-[#00D5B0]'}`}>
+                <span className={`text-xs tracking-widest ${scrolled ? 'text-[#00D5B0]' : 'text-[#00D5B0]'}`}>
                   HARMONY OF MIND
                 </span>
               </div>
@@ -59,36 +64,59 @@ const Navbar = () => {
           </div>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.path}
-                to={link.path} 
-                className={`relative group text-lg ${
-                  scrolled ? 'text-white' : 'text-white'
-                } hover:text-[#00D5B0] transition-colors`}
-              >
-                {link.name}
-                <motion.div
-                  className={`absolute bottom-0 left-0 w-full h-0.5 bg-[#00D5B0] transform origin-left
-                    ${location.pathname === link.path ? 'scale-x-100' : 'scale-x-0'}
-                  `}
-                  initial={false}
-                  animate={{ scaleX: location.pathname === link.path ? 1 : 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </Link>
-            ))}
-            {currentUser && (
-              <Link 
-                to="/profile" 
-                className={`p-2 rounded-full transition-colors ${
-                  scrolled ? 'hover:bg-[#00D5B0]/10' : 'hover:bg-[#00D5B0]/10'
-                }`}
-              >
-                <UserCircleIcon className={`h-7 w-7 ${scrolled ? 'text-white' : 'text-white'} hover:text-[#00D5B0]`} />
-              </Link>
-            )}
+          <div className="hidden md:flex items-center space-x-6">
+            <div className="flex items-center space-x-6 border-r border-[#00D5B0]/20 pr-6">
+              {mainNavLinks.map((link) => (
+                <Link 
+                  key={link.path}
+                  to={link.path} 
+                  className={`relative group text-sm font-medium ${
+                    scrolled ? 'text-white' : 'text-white'
+                  } hover:text-[#00D5B0] transition-colors`}
+                >
+                  {link.name}
+                  <motion.div
+                    className={`absolute bottom-0 left-0 w-full h-0.5 bg-[#00D5B0] transform origin-left
+                      ${location.pathname === link.path ? 'scale-x-100' : 'scale-x-0'}
+                    `}
+                    initial={false}
+                    animate={{ scaleX: location.pathname === link.path ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Link>
+              ))}
+            </div>
+            <div className="flex items-center space-x-6">
+              {secondaryNavLinks.map((link) => (
+                <Link 
+                  key={link.path}
+                  to={link.path} 
+                  className={`relative group text-sm font-medium ${
+                    scrolled ? 'text-white/80' : 'text-white/80'
+                  } hover:text-[#00D5B0] transition-colors`}
+                >
+                  {link.name}
+                  <motion.div
+                    className={`absolute bottom-0 left-0 w-full h-0.5 bg-[#00D5B0] transform origin-left
+                      ${location.pathname === link.path ? 'scale-x-100' : 'scale-x-0'}
+                    `}
+                    initial={false}
+                    animate={{ scaleX: location.pathname === link.path ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </Link>
+              ))}
+              {currentUser && (
+                <Link 
+                  to="/profile" 
+                  className={`p-1.5 rounded-full transition-colors ${
+                    scrolled ? 'hover:bg-[#00D5B0]/10' : 'hover:bg-[#00D5B0]/10'
+                  }`}
+                >
+                  <UserCircleIcon className={`h-6 w-6 ${scrolled ? 'text-white' : 'text-white'} hover:text-[#00D5B0]`} />
+                </Link>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -98,9 +126,9 @@ const Navbar = () => {
               className={`p-2 rounded-full ${scrolled ? 'text-white' : 'text-white'}`}
             >
               {isOpen ? (
-                <XMarkIcon className="h-8 w-8" />
+                <XMarkIcon className="h-6 w-6" />
               ) : (
-                <Bars3Icon className="h-8 w-8" />
+                <Bars3Icon className="h-6 w-6" />
               )}
             </button>
           </div>
@@ -117,11 +145,25 @@ const Navbar = () => {
               transition={{ duration: 0.3 }}
             >
               <div className="px-2 pt-2 pb-3 space-y-1 bg-[#0A192F] rounded-2xl shadow-lg mb-4">
-                {navLinks.map((link) => (
+                <div className="px-2 py-2 text-sm font-medium text-[#00D5B0]">Main Features</div>
+                {mainNavLinks.map((link) => (
                   <Link
                     key={link.path}
                     to={link.path}
-                    className={`block px-4 py-3 rounded-lg text-white text-lg hover:bg-[#00D5B0]/10 hover:text-[#00D5B0] ${
+                    className={`block px-4 py-2 rounded-lg text-white text-sm hover:bg-[#00D5B0]/10 hover:text-[#00D5B0] ${
+                      location.pathname === link.path ? 'bg-[#00D5B0]/10 text-[#00D5B0]' : ''
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <div className="px-2 py-2 text-sm font-medium text-[#00D5B0]">More</div>
+                {secondaryNavLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`block px-4 py-2 rounded-lg text-white/80 text-sm hover:bg-[#00D5B0]/10 hover:text-[#00D5B0] ${
                       location.pathname === link.path ? 'bg-[#00D5B0]/10 text-[#00D5B0]' : ''
                     }`}
                     onClick={() => setIsOpen(false)}
@@ -132,7 +174,7 @@ const Navbar = () => {
                 {currentUser && (
                   <Link
                     to="/profile"
-                    className="block px-4 py-3 rounded-lg text-white text-lg hover:bg-[#00D5B0]/10 hover:text-[#00D5B0]"
+                    className="block px-4 py-2 rounded-lg text-white/80 text-sm hover:bg-[#00D5B0]/10 hover:text-[#00D5B0]"
                     onClick={() => setIsOpen(false)}
                   >
                     Profile
